@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pimpim/pages/appointments.dart';
+import 'package:pimpim/pages/notes.dart';
+import 'package:pimpim/pages/tasks.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,6 +24,12 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _selectedNavbar = 0;
 
+  List<Widget> _widgetOptions = <Widget>[
+    Tasks(),
+    Notes(),
+    Appointments(),
+  ];
+
   void _changeSelectedNavBar(int index) {
     setState(() {
       _selectedNavbar = index;
@@ -33,10 +42,7 @@ class _MainScreenState extends State<MainScreen> {
       appBar: AppBar(
         title: Text('Pimpim'),
       ),
-      body: Center(
-        child:
-            Text('Tab aktif: $_selectedNavbar', style: TextStyle(fontSize: 16)),
-      ),
+      body: _widgetOptions.elementAt(_selectedNavbar),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
